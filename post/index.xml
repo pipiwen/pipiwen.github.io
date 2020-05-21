@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on SYW BLOG SITE</title>
+    <link>https://pipiwen.github.io/post/</link>
+    <description>Recent content in Posts on SYW BLOG SITE</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 04 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://pipiwen.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Welcome to Syw Blog</title>
+      <link>https://pipiwen.github.io/2017/11/03/hello-world/</link>
+      <pubDate>Mon, 04 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://pipiwen.github.io/2017/11/03/hello-world/</guid>
+      <description> “Yeah It&amp;rsquo;s on. ”
+ Hello World! </description>
+    </item>
+    
+  </channel>
+</rss>
