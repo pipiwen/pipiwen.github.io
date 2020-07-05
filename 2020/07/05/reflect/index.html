@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="SYW BLOG SITE">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="https://pipiwen.github.io//img/home-bg-jeep.jpg">
+    <meta property="twitter:image" content="https://pipiwen.github.io//img/home-bg-jeep.jpg" />
+    
+
+    
+    <meta name="title" content="Reflect" />
+    <meta property="og:title" content="Reflect" />
+    <meta property="twitter:title" content="Reflect" />
+    
+
+    
+    <meta name="description" content="史毓文，程序员, 开源爱好者，生活探险家 | 这里是 史毓文 的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="史毓文，程序员, 开源爱好者，生活探险家 | 这里是 史毓文 的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="史毓文，程序员, 开源爱好者，生活探险家 | 这里是 史毓文 的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Reflect-史毓文的博客 | Shi.yuwen Blog</title>
+
+    <link rel="canonical" href="/2020/07/05/reflect/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+    
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    
+    
+
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+
+    
+    
+
+</head>
+
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">SYW BLOG SITE</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                        
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-jeep.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>Reflect</h1>
+                    <h2 class="subheading">Java反射</h2>
+                    <span class="meta">
+                        Posted by 
+                        
+                            史毓文
+                         
+                        on 
+                        Sunday, July 5, 2020
+                        
+                        
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#反射的应用">反射的应用</a></li>
+    <li><a href="#反射机制">反射机制</a></li>
+    <li><a href="#class类">Class类</a></li>
+    <li><a href="#小结">小结</a></li>
+  </ul>
+</nav>
+                
+                <h2 id="反射的应用">反射的应用</h2>
+<ol>
+<li>SpringMVC中处理web请求,利用反射和注解可以将请求参数转换为java对象,将java对象变为相应内容.</li>
+<li>Spring利用反射的特性实现了对象管理容器,可以方便管理对象的生命周期和其中复杂的依赖关系.</li>
+<li>AOP利用反射的特性将日志记录,安全检查和主体业务相分离.</li>
+</ol>
+<h2 id="反射机制">反射机制</h2>
+<ul>
+<li>一般操作数据是都是知道并且依赖于数据类型的如new关键字,将对象传递给方法特定</li>
+</ul>
+<ul>
+<li>编译器也是根据类型进行检查并编译</li>
+</ul>
+<ul>
+<li>但是反射不一样,反射是在运行时进行的,动态获取类(接口)信息,变量信息,方法信息,构造器信息,根据这些动态获取到的信息,
+来动态创建对象,或修改访问成员,调用方法等.</li>
+</ul>
+<h2 id="class类">Class类</h2>
+<ol>
+<li>每个一加载的类在内存中有有一份类的信息,每个对象都有指向它所述类信息的应用.</li>
+</ol>
+<ul>
+<li>java中所有类的根父类Objec都有方法指向Class类</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">native</span> Class<span style="color:#f92672">&lt;?&gt;</span> getClass<span style="color:#f92672">()</span>
+</code></pre></div><ul>
+<li>Class是一个泛型类,有一个类型参数,因此getCalss()是不知道具体的类型.</li>
+</ul>
+<ul>
+<li>不一定需要拥有对象调用方法,直接使用&lt;类名&gt;.class属性</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Class<span style="color:#f92672">&lt;</span>Date<span style="color:#f92672">&gt;</span> cls <span style="color:#f92672">=</span> Date<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">;</span>
+</code></pre></div><ul>
+<li>接口也有&lt;接口&gt;.calss</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Class<span style="color:#f92672">&lt;</span>Comparable<span style="color:#f92672">&gt;</span> cls <span style="color:#f92672">=</span> Comparable<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">;</span>
+</code></pre></div><ul>
+<li>基本类型没有getClass()但是有对应的class对象,void作为特殊的返回类型也是有的</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Class<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> intCls <span style="color:#f92672">=</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">;</span>
+Class<span style="color:#f92672">&lt;</span>Byte<span style="color:#f92672">&gt;</span> byteCls <span style="color:#f92672">=</span> <span style="color:#66d9ef">byte</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">;</span>
+Class<span style="color:#f92672">&lt;</span>Character<span style="color:#f92672">&gt;</span> charCls <span style="color:#f92672">=</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">;</span>
+Class<span style="color:#f92672">&lt;</span>Double<span style="color:#f92672">&gt;</span> doubleCls <span style="color:#f92672">=</span> <span style="color:#66d9ef">double</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">;</span>
+Class<span style="color:#f92672">&lt;</span>Void<span style="color:#f92672">&gt;</span> voidCls <span style="color:#f92672">=</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">;</span>
+</code></pre></div><ul>
+<li>对于数组,每种类型的数组都有对应的class对象,每个维度都有一个,即以为数组有一个Class对象,二位数组有2个.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String<span style="color:#f92672">[]</span> strArr <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String<span style="color:#f92672">[</span>10<span style="color:#f92672">];</span>
+<span style="color:#66d9ef">int</span><span style="color:#f92672">[][]</span> twoDimArr <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>3<span style="color:#f92672">][</span>2<span style="color:#f92672">];</span>
+<span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> oneDimArr <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>10<span style="color:#f92672">];</span>
+Class<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">extends</span> String<span style="color:#f92672">[]&gt;</span> strArrCls <span style="color:#f92672">=</span> strArr<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">();</span>
+Class<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">extends</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[][]&gt;</span> twoDimArrCls <span style="color:#f92672">=</span> twoDimArr<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">();</span>
+Class<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">extends</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]&gt;</span> oneDimArrCls <span style="color:#f92672">=</span> oneDimArr<span style="color:#f92672">.</span><span style="color:#a6e22e">getClass</span><span style="color:#f92672">();</span>
+</code></pre></div><ol start="2">
+<li>Class有个forName()方法,可以根据类名直接加载class</li>
+</ol>
+<ul>
+<li>注意forName可能抛出异常ClassNotFoundException</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+    Class<span style="color:#f92672">&lt;?&gt;</span> cls <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.util.HashMap&#34;</span><span style="color:#f92672">);</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>cls<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">());</span>
+<span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>ClassNotFoundException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    e<span style="color:#f92672">.</span><span style="color:#a6e22e">printStackTrace</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>Class有如下方法可以获取与名称有关的信息</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getName</span><span style="color:#f92672">()</span>
+<span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getSimpleName</span><span style="color:#f92672">()</span>
+<span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">getCanonicalName</span><span style="color:#f92672">()</span>
+<span style="color:#66d9ef">public</span> Package <span style="color:#a6e22e">getPackage</span><span style="color:#f92672">()</span>
+</code></pre></div><p><img src="/img/reflect_forName.png" alt="avatar"></p>
+<ul>
+<li>需要说明的是数组类型的getName返回值，它使用前缀[表示数组，有几个[表示是几维数组，数组的类型用一个字符表示，I表示int，L表示类或接口，
+其他类型与字符的对应关系为: boolean(Z), byte(B), char(C), double(D), float(F), long(J), short(S)，对于引用类型的数组，注意最后有一个分号&rdquo;;&quot;。</li>
+</ul>
+<ol start="3">
+<li>类中定义的静态或者实例变量都被称为字段.用类Field表示于包java.util.reflect下，Class有四个获取字段信息的方法：</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//返回所有的public字段，包括其父类的，如果没有字段，返回空数组
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> Field<span style="color:#f92672">[]</span> <span style="color:#a6e22e">getFields</span><span style="color:#f92672">()</span>
+<span style="color:#75715e">//返回本类声明的所有字段，包括非public的，但不包括父类的
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> Field<span style="color:#f92672">[]</span> <span style="color:#a6e22e">getDeclaredFields</span><span style="color:#f92672">()</span>
+<span style="color:#75715e">//返回本类或父类中指定名称的public字段，找不到抛出异常NoSuchFieldException
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> Field <span style="color:#a6e22e">getField</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span>
+<span style="color:#75715e">//返回本类中声明的指定名称的字段，找不到抛出异常NoSuchFieldException
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> Field <span style="color:#a6e22e">getDeclaredField</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">)</span>
+</code></pre></div><ol start="4">
+<li>获取方法信息</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//返回所有的public方法，包括其父类的，如果没有方法，返回空数组
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> Method<span style="color:#f92672">[]</span> <span style="color:#a6e22e">getMethods</span><span style="color:#f92672">()</span>
+<span style="color:#75715e">//返回本类声明的所有方法，包括非public的，但不包括父类的
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> Method<span style="color:#f92672">[]</span> <span style="color:#a6e22e">getDeclaredMethods</span><span style="color:#f92672">()</span>
+<span style="color:#75715e">//返回本类或父类中指定名称和参数类型的public方法，找不到抛出异常NoSuchMethodException
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> Method <span style="color:#a6e22e">getMethod</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">,</span> Class<span style="color:#f92672">&lt;?&gt;...</span> parameterTypes<span style="color:#f92672">)</span>
+<span style="color:#75715e">//返回本类中声明的指定名称和参数类型的方法，找不到抛出异常NoSuchMethodException
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> Method <span style="color:#a6e22e">getDeclaredMethod</span><span style="color:#f92672">(</span>String name<span style="color:#f92672">,</span> Class<span style="color:#f92672">&lt;?&gt;...</span> parameterTypes<span style="color:#f92672">)</span>
+</code></pre></div><ol start="5">
+<li>创建对象和构造方法
+Class中有一个newInstance()方法可以用它来创建对象</li>
+</ol>
+<ul>
+<li>他会调用类的默认构造方法(即无参构造方法)来创建对象</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> T <span style="color:#a6e22e">newInstance</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> InstantiationException<span style="color:#f92672">,</span> IllegalAccessException
+</code></pre></div><ul>
+<li>newInstance()只能调用无参构造方法,但是可以获取类的构造器来调用有参构造方法</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">//获取所有的public构造方法，返回值可能为长度为0的空数组
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> Constructor<span style="color:#f92672">&lt;?&gt;[]</span> getConstructors<span style="color:#f92672">()</span>
+<span style="color:#75715e">//获取所有的构造方法，包括非public的
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> Constructor<span style="color:#f92672">&lt;?&gt;[]</span> getDeclaredConstructors<span style="color:#f92672">()</span>
+<span style="color:#75715e">//获取指定参数类型的public构造方法，没找到抛出异常NoSuchMethodException
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> Constructor<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getConstructor</span><span style="color:#f92672">(</span>Class<span style="color:#f92672">&lt;?&gt;...</span> parameterTypes<span style="color:#f92672">)</span>
+<span style="color:#75715e">//获取指定参数类型的构造方法，包括非public的，没找到抛出异常NoSuchMethodException
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> Constructor<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getDeclaredConstructor</span><span style="color:#f92672">(</span>Class<span style="color:#f92672">&lt;?&gt;...</span> parameterTypes<span style="color:#f92672">)</span> 
+</code></pre></div><ol start="6">
+<li>判断变量指向的实际对象类型InstanceOf(),检查的类型是动态的.</li>
+</ol>
+<ul>
+<li>如下代码实际效果是一样的</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>list <span style="color:#66d9ef">instanceof</span> ArrayList<span style="color:#f92672">){</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;array list&#34;</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+
+Class cls <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;java.util.ArrayList&#34;</span><span style="color:#f92672">);</span>
+<span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>cls<span style="color:#f92672">.</span><span style="color:#a6e22e">isInstance</span><span style="color:#f92672">(</span>list<span style="color:#f92672">)){</span>
+    System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;array list&#34;</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ol start="7">
+<li>类的加载
+Class有2个方法可以根据类名加载类</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Class<span style="color:#f92672">&lt;?&gt;</span> forName<span style="color:#f92672">(</span>String className<span style="color:#f92672">)</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Class<span style="color:#f92672">&lt;?&gt;</span> forName<span style="color:#f92672">(</span>String name<span style="color:#f92672">,</span> <span style="color:#66d9ef">boolean</span> initialize<span style="color:#f92672">,</span> ClassLoader loader<span style="color:#f92672">)</span>
+</code></pre></div><ul>
+<li>ClassLoader表示类加载器,initialize表示加载后是否执行初始化代码,其中第一个相当于调用</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span>className<span style="color:#f92672">,</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">,</span> currentLoader<span style="color:#f92672">)</span>
+</code></pre></div><ul>
+<li>className与clas.getName()的返回值是一致的</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;[Ljava.lang.String;&#34;</span><span style="color:#f92672">;</span>
+Class cls <span style="color:#f92672">=</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span>name<span style="color:#f92672">);</span>
+System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>cls <span style="color:#f92672">==</span> String<span style="color:#f92672">[].</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+</code></pre></div><ul>
+<li>但是基本类型不支持forName()方法,也就是说如下写法会抛出ClassNotFoundException</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;int&#34;</span><span style="color:#f92672">);</span>
+</code></pre></div><ul>
+<li>但是可以对forName方法进行包装</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Class<span style="color:#f92672">&lt;?&gt;</span> forName<span style="color:#f92672">(</span>String className<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> ClassNotFoundException<span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;int&#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>className<span style="color:#f92672">)){</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#75715e">//其他基本类型...
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> Class<span style="color:#f92672">.</span><span style="color:#a6e22e">forName</span><span style="color:#f92672">(</span>className<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="小结">小结</h2>
+<ol>
+<li>反射使用灵活是,类型是在运行时才知道的.</li>
+<li>反射容易出现类型异常,编译时不能帮我们检查类型.</li>
+<li>反射的性能要低一些,反射在调用method/field是需要先查找对应的字段方法.</li>
+</ol>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="https://pipiwen.github.io/"><img src="/img/favicon.png" />SYW BLOG SITE</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/05/22/tree/" data-toggle="tooltip" data-placement="top" title="Tree">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-11 col-lg-offset-1
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href='' rel="alternate" type="application/rss+xml" title="SYW BLOG SITE" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    <li>
+                        <a target="_blank" href="https://stackoverflow.com/users/yourstackoverflowid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+            
+                    
+                    
+                    
+            
+            
+            
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; SYW BLOG SITE 2020
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>
