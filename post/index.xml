@@ -6,10 +6,19 @@
     <description>Recent content in Posts on SYW BLOG SITE</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://pipiwen.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Reflect</title>
+      <link>https://pipiwen.github.io/2020/07/05/reflect/</link>
+      <pubDate>Sun, 05 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://pipiwen.github.io/2020/07/05/reflect/</guid>
+      <description>反射的应用  SpringMVC中处理web请求,利用反射和注解可以将请求参数转换为java对象,将java对象变为相应内容. Spring利用反射的特性实现了对象管理容器,可以方便管理对象的生命周期和其中复杂的依赖关系. AOP利用反射的特性将日志记录,安全检查和主体业务相分离.  反射机制  一般操作数据是都是知道并且依赖于数据类型的如new关键字,将对象传递给方法特定   编译器也是根据类型进行检查并编译   但是反射不一样,反射是在运行时进行的,动态获取类(接口)信息,变量信息,方法信息,构造器信息,根据这些动态获取到的信息, 来动态创建对象,或修改访问成员,调用方法等.  Class类  每个一加载的类在内存中有有一份类的信息,每个对象都有指向它所述类信息的应用.   java中所有类的根父类Objec都有方法指向Class类  public final native Class&amp;lt;?&amp;gt; getClass() Class是一个泛型类,有一个类型参数,因此getCalss()是不知道具体的类型.   不一定需要拥有对象调用方法,直接使用&amp;lt;类名&amp;gt;.class属性  Class&amp;lt;Date&amp;gt; cls = Date.class; 接口也有&amp;lt;接口&amp;gt;.calss  Class&amp;lt;Comparable&amp;gt; cls = Comparable.class; 基本类型没有getClass()但是有对应的class对象,void作为特殊的返回类型也是有的  Class&amp;lt;Integer&amp;gt; intCls = int.class;Class&amp;lt;Byte&amp;gt; byteCls = byte.class;Class&amp;lt;Character&amp;gt; charCls = char.class;Class&amp;lt;Double&amp;gt; doubleCls = double.class;Class&amp;lt;Void&amp;gt; voidCls = void.class; 对于数组,每种类型的数组都有对应的class对象,每个维度都有一个,即以为数组有一个Class对象,二位数组有2个.</description>
+    </item>
     
     <item>
       <title>Tree</title>
